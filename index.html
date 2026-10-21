@@ -3,164 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nefas Silk Paints - CEO Strategic Analytics</title>
+    <title>Nefas Silk Paints - Executive Command Center</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg: #f4f7fb;
+            --bg: #f8fafc;
             --card: #ffffff;
             --navy: #0f172a;
-            --red: #d91c1c;
+            --red: #dc2626;
             --green: #16a34a;
-            --amber: #f59e0b;
+            --amber: #d97706;
             --text: #1e293b;
             --muted: #64748b;
             --border: #e2e8f0;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); padding: 24px 40px; }
+        body { background-color: var(--bg); color: var(--text); padding: 24px 36px; }
         
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
-        .brand-box { display: flex; align-items: center; gap: 18px; }
+        /* Header styling */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px; }
+        .brand-box { display: flex; align-items: center; gap: 16px; }
         .logo-card {
-            background: #fff; width: 76px; height: 76px; border-radius: 14px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: center;
+            background: #fff; width: 72px; height: 72px; border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center;
             overflow: hidden; border: 1px solid var(--border); padding: 6px;
         }
         .logo-card img { width: 100%; height: 100%; object-fit: contain; }
-        .title-group h1 { font-size: 32px; font-weight: 900; color: var(--navy); }
+        .title-group h1 { font-size: 28px; font-weight: 900; color: var(--navy); letter-spacing: -0.5px; }
         .title-group h1 span { color: var(--red); }
-        .timestamp { font-size: 13px; color: var(--muted); font-weight: 600; margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+        .timestamp { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 2px; display: flex; align-items: center; gap: 6px; }
         .dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; }
 
-        .header-badges { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .header-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
         
         .audio-briefing {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #fff; padding: 10px 18px; border-radius: 12px;
-            display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: #fff; padding: 8px 16px; border-radius: 10px;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
         .audio-btn {
-            background: var(--red); border: none; color: #fff; width: 32px; height: 32px;
+            background: var(--red); border: none; color: #fff; width: 30px; height: 30px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
             font-weight: bold; transition: transform 0.2s;
         }
-        .audio-btn:hover { transform: scale(1.08); }
+        .audio-btn:hover { transform: scale(1.05); }
 
         .fx-badge {
-            background: #334155; color: #fff; padding: 10px 18px; border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: right;
+            background: #334155; color: #fff; padding: 10px 16px; border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08); text-align: right;
         }
-        .fx-badge small { display: block; font-size: 10px; text-transform: uppercase; opacity: 0.85; }
-        .fx-badge strong { font-size: 18px; font-weight: 800; }
+        .fx-badge small { display: block; font-size: 9px; text-transform: uppercase; opacity: 0.8; }
+        .fx-badge strong { font-size: 16px; font-weight: 800; }
 
-        .ticker-bar {
-            background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af;
-            padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
-            margin-bottom: 24px; display: flex; align-items: center; gap: 10px; overflow: hidden;
-        }
-        .ticker-badge { background: #3b82f6; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; }
-
+        /* Navigation Tabs */
         .nav-bar {
-            background: #fff; padding: 8px; border-radius: 999px; display: inline-flex;
-            gap: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); margin-bottom: 24px; flex-wrap: wrap;
+            background: #fff; padding: 6px; border-radius: 999px; display: inline-flex;
+            gap: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); margin-bottom: 20px; flex-wrap: wrap; border: 1px solid var(--border);
         }
         .tab-btn {
-            border: none; background: transparent; padding: 10px 20px; border-radius: 999px;
-            font-size: 12px; font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.2s;
+            border: none; background: transparent; padding: 8px 18px; border-radius: 999px;
+            font-size: 11px; font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.2s;
         }
         .tab-btn.active { background: var(--navy); color: #fff; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 24px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; margin-bottom: 24px; }
-        .card { background: var(--card); border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); border: 1px solid var(--border); margin-bottom: 24px; }
-        .card-header { font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--navy); margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .card { background: var(--card); border-radius: 14px; padding: 20px; box-shadow: 0 4px 14px rgba(0,0,0,0.03); border: 1px solid var(--border); margin-bottom: 20px; }
+        .card-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
 
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        th { text-align: left; padding: 10px; border-bottom: 2px solid var(--border); color: var(--muted); text-transform: uppercase; font-size: 11px; }
-        td { padding: 12px 10px; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th { text-align: left; padding: 8px; border-bottom: 2px solid var(--border); color: var(--muted); text-transform: uppercase; font-size: 10px; }
+        td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
 
-        .simulator-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-        .slider-group label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+        /* Simulator Styles */
+        .simulator-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+        .slider-group label { display: block; font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
         .slider-group input { width: 100%; accent-color: var(--red); }
-        .sim-result-box { background: #f8fafc; border: 1px dashed var(--border); padding: 16px; border-radius: 12px; display: flex; justify-content: space-around; text-align: center; margin-bottom: 16px; }
-        .sim-metric span { display: block; font-size: 11px; text-transform: uppercase; color: var(--muted); }
-        .sim-metric strong { font-size: 20px; font-weight: 800; color: var(--navy); }
+        .sim-result-box { background: #f8fafc; border: 1px dashed var(--border); padding: 14px; border-radius: 10px; display: flex; justify-content: space-around; text-align: center; margin-bottom: 14px; }
+        .sim-metric span { display: block; font-size: 10px; text-transform: uppercase; color: var(--muted); }
+        .sim-metric strong { font-size: 18px; font-weight: 800; color: var(--navy); }
 
-        /* Simulative Descriptive AI Panel Styles */
         .ai-descriptive-box {
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             border-left: 4px solid var(--navy);
-            padding: 14px 16px; border-radius: 8px; font-size: 12px; color: var(--text); line-height: 1.5;
+            padding: 12px 14px; border-radius: 8px; font-size: 11px; color: var(--text); line-height: 1.5;
         }
-        .ai-descriptive-box strong { color: var(--navy); display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 11px; }
+        .ai-descriptive-box strong { color: var(--navy); display: block; margin-bottom: 3px; text-transform: uppercase; font-size: 10px; }
 
-        .heatmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-        .heatmap-node { padding: 14px; border-radius: 10px; border-left: 4px solid #ccc; background: #f8fafc; }
+        .heatmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+        .heatmap-node { padding: 12px; border-radius: 8px; border-left: 4px solid #ccc; background: #f8fafc; }
         .heatmap-node.risk-high { border-left-color: var(--red); background: #fef2f2; }
         .heatmap-node.risk-med { border-left-color: var(--amber); background: #fffbeb; }
         .heatmap-node.risk-low { border-left-color: var(--green); background: #f0fdf4; }
-        .heatmap-node small { font-size: 10px; text-transform: uppercase; font-weight: 700; }
-        .heatmap-node h4 { font-size: 14px; font-weight: 800; margin: 4px 0; color: var(--navy); }
-        .heatmap-node p { font-size: 11px; color: var(--muted); }
+        .heatmap-node small { font-size: 9px; text-transform: uppercase; font-weight: 700; }
+        .heatmap-node h4 { font-size: 13px; font-weight: 800; margin: 3px 0; color: var(--navy); }
+        .heatmap-node p { font-size: 10px; color: var(--muted); }
 
         .crisis-banner {
-            background: linear-gradient(135deg, #0f172a 0%, #2e1025 100%);
-            color: #fff; border-radius: 18px; padding: 28px 32px; margin-bottom: 24px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #fff; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px;
         }
-        .crisis-title { color: #f87171; font-weight: 800; font-size: 16px; margin-bottom: 22px; }
-        .crisis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-        .crisis-item { border-left: 3px solid var(--red); padding-left: 16px; }
+        .crisis-title { color: #f87171; font-weight: 800; font-size: 15px; margin-bottom: 18px; }
+        .crisis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .crisis-item { border-left: 3px solid var(--red); padding-left: 14px; }
         .crisis-item.amber { border-left-color: var(--amber); }
         .crisis-item.blue { border-left-color: #3b82f6; }
-        .crisis-item small { font-size: 11px; text-transform: uppercase; color: #cbd5e1; }
-        .crisis-item h2 { font-size: 24px; font-weight: 800; margin: 6px 0; }
-        .crisis-item p { font-size: 12px; color: #94a3b8; }
+        .crisis-item small { font-size: 10px; text-transform: uppercase; color: #cbd5e1; }
+        .crisis-item h2 { font-size: 22px; font-weight: 800; margin: 4px 0; }
+        .crisis-item p { font-size: 11px; color: #94a3b8; }
 
-        .chart-container { position: relative; height: 340px; width: 100%; }
+        .chart-container { position: relative; height: 300px; width: 100%; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div class="brand-box">
-            <!-- Fixed Logo Link -->
             <div class="logo-card"><img src="Logo.jpg" alt="Nefas Silk Logo"></div>
             <div class="title-group">
                 <h1>STRATEGIC <span>ANALYTICS</span></h1>
-                <div class="timestamp"><span class="dot"></span> LAST UPDATED: 10/21/2026, 03:15:00 PM (EAT)</div>
+                <div class="timestamp"><span class="dot"></span> EXECUTIVE COMMAND CENTER • 10/21/2026, 03:30 PM EAT</div>
             </div>
         </div>
-        <div class="header-badges">
+        <div class="header-actions">
             <div class="audio-briefing">
                 <button class="audio-btn" onclick="toggleAudioBriefing()" id="playBriefingBtn">▶</button>
                 <div>
-                    <small style="font-size:9px; text-transform:uppercase; color:#94a3b8; display:block;">Daily Executive Briefing</small>
-                    <strong style="font-size:12px;" id="audioStatusText">Listen 60s Audio Recap</strong>
+                    <small style="font-size:8px; text-transform:uppercase; color:#94a3b8; display:block;">Audio Brief</small>
+                    <strong style="font-size:11px;" id="audioStatusText">60s CEO Recap</strong>
                 </div>
             </div>
             <div class="fx-badge">
-                <small>OFFICIAL CBE RATE</small>
+                <small>Official CBE Rate</small>
                 <strong>USD/ETB: 161.29</strong>
             </div>
         </div>
     </div>
 
-    <div class="ticker-bar">
-        <span class="ticker-badge">Margin Alert</span>
-        <marquee scrollamount="4">
-            Brent Crude ($110.20) & Red Sea logistics surcharges (+20%) are estimated to impact Q4 transport overhead by +3.4%. Agro-export inflows (+47% Y/Y) remain strong to cushion chemical import financing.
-        </marquee>
-    </div>
-
     <!-- Navigation Tabs -->
     <div class="nav-bar">
         <button class="tab-btn active" onclick="switchTab('markets', this)">📈 GLOBAL MARKETS</button>
-        <button class="tab-btn" onclick="switchTab('sourcing', this)">📊 STRATEGIC SOURCING</button>
+        <button class="tab-btn" onclick="switchTab('sourcing', this)">📊 STRATEGIC SOURCING & SIMULATOR</button>
         <button class="tab-btn" onclick="switchTab('ecx', this)">☕ ET ECX & EXPORTS</button>
-        <button class="tab-btn" onclick="switchTab('logistics', this)">🌍 GLOBAL MACRO & LOGISTICS</button>
+        <button class="tab-btn" onclick="switchTab('logistics', this)">🌍 MACRO & SUPPLY CHAIN RISK</button>
+        <button class="tab-btn" onclick="switchTab('sbu', this)">🏢 SBU PERFORMANCE</button>
     </div>
 
     <!-- TAB 1: GLOBAL MARKETS -->
@@ -168,56 +156,55 @@
         <div class="grid-4">
             <div class="card" style="margin-bottom:0;">
                 <div class="card-header">ARABICA FUTURES (LB)</div>
-                <h2 style="font-size:26px; color:var(--navy);">$3.15</h2>
+                <h2 style="font-size:24px; color:var(--navy);">$3.15</h2>
             </div>
             <div class="card" style="margin-bottom:0;">
                 <div class="card-header">ROBUSTA FUTURES (MT)</div>
-                <h2 style="font-size:26px; color:var(--navy);">$3402.00</h2>
+                <h2 style="font-size:24px; color:var(--navy);">$3,402.00</h2>
             </div>
             <div class="card" style="margin-bottom:0;">
                 <div class="card-header">LIVE BRENT CRUDE (BBL)</div>
-                <h2 style="font-size:26px; color:var(--navy);">$110.20</h2>
+                <h2 style="font-size:24px; color:var(--navy);">$110.20</h2>
             </div>
             <div class="card" style="margin-bottom:0;">
                 <div class="card-header">RUBBER RSS3 (KG)</div>
-                <h2 style="font-size:26px; color:var(--navy);">$283.50</h2>
+                <h2 style="font-size:24px; color:var(--navy);">$283.50</h2>
             </div>
         </div>
 
         <div class="grid-2">
             <div class="card">
-                <div class="card-header">LIVE OIL MARKET TREND</div>
-                <div class="chart-container" style="height:240px;">
+                <div class="card-header">LIVE OIL MARKET TREND (SOLVENT PROXY)</div>
+                <div class="chart-container" style="height:220px;">
                     <canvas id="oilChart"></canvas>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header">VERIFIED CBE CROSS-RATES</div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                    <div style="background:#f8fafc; padding:14px; border-radius:10px;"><small style="color:var(--muted); font-size:10px;">EUR (EURO)</small><strong style="font-size:18px;">181.07</strong></div>
-                    <div style="background:#f8fafc; padding:14px; border-radius:10px;"><small style="color:var(--muted); font-size:10px;">GBP (POUND)</small><strong style="font-size:18px;">215.53</strong></div>
-                    <div style="background:#f8fafc; padding:14px; border-radius:10px;"><small style="color:var(--muted); font-size:10px;">CNY (YUAN)</small><strong style="font-size:18px;">24.10</strong></div>
-                    <div style="background:#f8fafc; padding:14px; border-radius:10px;"><small style="color:var(--muted); font-size:10px;">AED (DIRHAM)</small><strong style="font-size:18px;">43.92</strong></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#f8fafc; padding:12px; border-radius:8px;"><small style="color:var(--muted); font-size:9px;">EUR (EURO)</small><strong style="font-size:16px;">181.07</strong></div>
+                    <div style="background:#f8fafc; padding:12px; border-radius:8px;"><small style="color:var(--muted); font-size:9px;">GBP (POUND)</small><strong style="font-size:16px;">215.53</strong></div>
+                    <div style="background:#f8fafc; padding:12px; border-radius:8px;"><small style="color:var(--muted); font-size:9px;">CNY (YUAN)</small><strong style="font-size:16px;">24.10</strong></div>
+                    <div style="background:#f8fafc; padding:12px; border-radius:8px;"><small style="color:var(--muted); font-size:9px;">AED (DIRHAM)</small><strong style="font-size:16px;">43.92</strong></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- TAB 2: STRATEGIC SOURCING -->
+    <!-- TAB 2: STRATEGIC SOURCING & SIMULATOR -->
     <div id="tab-sourcing" class="tab-content">
         <div class="grid-2">
             <div class="card">
                 <div class="card-header">STRATEGIC EXPORT COMMODITIES TREND</div>
-                <p style="font-size:12px; color:var(--muted); margin-bottom:14px;">Base 100 Index tracking relative growth of Coffee vs. Sesame</p>
-                <div class="chart-container" style="height:280px;">
+                <p style="font-size:11px; color:var(--muted); margin-bottom:10px;">Base 100 Index tracking relative growth of Coffee vs. Sesame</p>
+                <div class="chart-container" style="height:260px;">
                     <canvas id="sourcingChart"></canvas>
                 </div>
             </div>
 
-            <!-- Executive Scenario Simulator with Simulative Descriptive Output -->
             <div class="card">
-                <div class="card-header">⚡ EXECUTIVE SCENARIO SIMULATOR</div>
-                <p style="font-size:12px; color:var(--muted); margin-bottom:14px;">Adjust macro variables to model Q4 import & margin impact:</p>
+                <div class="card-header">⚡ EXECUTIVE DECISION SIMULATOR</div>
+                <p style="font-size:11px; color:var(--muted); margin-bottom:12px;">Model macro-economic shifts on manufacturing margins in real time:</p>
                 
                 <div class="simulator-controls">
                     <div class="slider-group">
@@ -241,12 +228,48 @@
                     </div>
                 </div>
 
-                <!-- Live Simulative Descriptive Box -->
                 <div class="ai-descriptive-box" id="aiDescriptiveText">
-                    <strong>🤖 AI Descriptive Narrative:</strong>
-                    At current baseline parameters (0% FX adjustment, +20% freight premium), manufacturing input overhead remains manageable. Agro-export foreign currency inflows are sufficient to service scheduled chemical raw material imports without activating reserve liquidity buffers.
+                    <strong>🤖 General Manager's AI Briefing:</strong>
+                    Baseline parameters indicate stable operating conditions. Agro-export foreign currency inflows are fully supporting scheduled industrial chemical raw material imports.
                 </div>
             </div>
+        </div>
+
+        <!-- NEW: 1-Week Commodity Price & Fluctuation Analysis Card -->
+        <div class="card">
+            <div class="card-header">📋 1-WEEK COMMODITY PRICE FLUCTUATION & DRIVERS ANALYSIS</div>
+            <p style="font-size:11px; color:var(--muted); margin-bottom:14px;">Detailed weekly price performance and fundamental market drivers impacting manufacturing inputs and agro-exports:</p>
+            <table>
+                <thead>
+                    <tr><th>Commodity / Benchmark</th><th>1-Week Range / Price</th><th>Trend</th><th>Primary Explanation & Market Driver</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>NY Arabica Coffee (LB)</strong></td>
+                        <td>$2.97 - $3.15</td>
+                        <td><span style="color:var(--green);">▲ Bullish (+3.1%)</span></td>
+                        <td>Tightening global green coffee inventories and adverse weather conditions in South America. Short-term volatility driven by ICE exchange speculation and BRL currency shifts.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>London Robusta (MT)</strong></td>
+                        <td>$3,350 - $3,402</td>
+                        <td><span style="color:var(--navy);">■ Stable / Elevated</span></td>
+                        <td>Sustained high demand from instant coffee manufacturers substituting away from Arabica, combined with structural supply bottlenecks out of Southeast Asia.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brent Crude Oil (BBL)</strong></td>
+                        <td>$108.20 - $110.20</td>
+                        <td><span style="color:var(--green);">▲ Upward Pressures</span></td>
+                        <td>Serves as the baseline benchmark for chemical solvents and manufacturing energy. Pressured upward by Red Sea shipping disruptions and Cape of Good Hope rerouting delays.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Whitish Humera Sesame (MT)</strong></td>
+                        <td>RMB 10,700 (CIF Qingdao)</td>
+                        <td><span style="color:var(--navy);">■ Firm Benchmark</span></td>
+                        <td>Prices remain firm for Chinese import targets. Fluctuations tied directly to export season milestones, Qingdao port stock levels, and strict purity/moisture compliance.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -254,15 +277,15 @@
     <div id="tab-ecx" class="tab-content">
         <div class="grid-2">
             <div class="card" style="background:linear-gradient(135deg, #3b0707 0%, #1a0303 100%); color:#fff;">
-                <small style="color:#f87171; font-weight:700; font-size:11px;">CHINA EXPORT TARGET</small>
-                <h2 style="font-size:24px; margin:6px 0;">Whitish Humera Sesame</h2>
-                <div style="font-size:32px; font-weight:900; color:#fbbf24; margin:10px 0;">RMB 10,700 <span style="font-size:14px; color:#fff;">/MT</span></div>
-                <p style="font-size:12px; opacity:0.8;">Direct dispatch prioritized for Grade-A shipments.</p>
+                <small style="color:#f87171; font-weight:700; font-size:10px;">CHINA EXPORT TARGET</small>
+                <h2 style="font-size:22px; margin:4px 0;">Whitish Humera Sesame</h2>
+                <div style="font-size:28px; font-weight:900; color:#fbbf24; margin:8px 0;">RMB 10,700 <span style="font-size:13px; color:#fff;">/MT</span></div>
+                <p style="font-size:11px; opacity:0.8;">Direct dispatch prioritized for Grade-A shipments.</p>
             </div>
             <div class="card">
                 <div class="card-header">OFFICIAL EXCHANGE PLATFORM</div>
                 <h3>ECX Market Watch</h3>
-                <p style="font-size:12px; color:var(--muted); margin-top:8px;">Captures all daily trading activity across Local Coffee, Export Coffee, Oilseeds, and Pulses directly from the central matching engine.</p>
+                <p style="font-size:11px; color:var(--muted); margin-top:6px;">Captures daily trading activity across Local Coffee, Export Coffee, Oilseeds, and Pulses directly from the central matching engine.</p>
             </div>
         </div>
 
@@ -283,7 +306,7 @@
         </div>
     </div>
 
-    <!-- TAB 4: GLOBAL MACRO & LOGISTICS -->
+    <!-- TAB 4: MACRO & SUPPLY CHAIN RISK -->
     <div id="tab-logistics" class="tab-content">
         <div class="crisis-banner">
             <div class="crisis-title">⚠️ RED SEA CORRIDOR CRISIS (2026 NORMALIZATION)</div>
@@ -335,15 +358,34 @@
 
             <div class="card">
                 <div class="card-header">📊 ETHIOPIA MACRO TRADE BALANCE</div>
-                <div style="background:#ecfdf5; border-left:4px solid #10b981; padding:12px; border-radius:8px; margin-bottom:12px;">
-                    <strong style="color:#065f46; font-size:11px;">AGRO-EXPORT STRENGTH</strong>
-                    <p style="font-size:12px; color:#047857; margin-top:2px;">Coffee exports surging 47% Y/Y, providing critical foreign exchange liquidity for industrial manufacturing imports.</p>
+                <div style="background:#ecfdf5; border-left:4px solid #10b981; padding:10px; border-radius:6px; margin-bottom:10px;">
+                    <strong style="color:#065f46; font-size:10px;">AGRO-EXPORT STRENGTH</strong>
+                    <p style="font-size:11px; color:#047857; margin-top:2px;">Coffee exports surging 47% Y/Y, providing critical foreign exchange liquidity for industrial manufacturing imports.</p>
                 </div>
-                <div style="background:#eff6ff; border-left:4px solid #3b82f6; padding:12px; border-radius:8px;">
-                    <strong style="color:#1e40af; font-size:11px;">CHEMICAL SOURCING RELIANCE</strong>
-                    <p style="font-size:12px; color:#1d4ed8; margin-top:2px;">Plastics and industrial chemicals (TiO2, Resins) heavily concentrated in supply chains originating from China, UAE, and India.</p>
+                <div style="background:#eff6ff; border-left:4px solid #3b82f6; padding:10px; border-radius:6px;">
+                    <strong style="color:#1e40af; font-size:10px;">CHEMICAL SOURCING RELIANCE</strong>
+                    <p style="font-size:11px; color:#1d4ed8; margin-top:2px;">Plastics and industrial chemicals (TiO2, Resins) heavily concentrated in supply chains originating from China, UAE, and India.</p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: SBU PERFORMANCE -->
+    <div id="tab-sbu" class="tab-content">
+        <div class="card">
+            <div class="card-header">📊 STRATEGIC SBU & BRANCH PERFORMANCE MATRIX</div>
+            <p style="font-size:11px; color:var(--muted); margin-bottom:14px;">Real-time operational capacity overview across Nefas Silk manufacturing plants and regional commercial hubs:</p>
+            <table>
+                <thead>
+                    <tr><th>Strategic Business Unit</th><th>Region</th><th>Capacity Utilization</th><th>Operational Status</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Nefas Silk Main Factory</td><td>Addis Ababa</td><td>88.5%</td><td><span style="color:var(--green);">Optimal</span></td></tr>
+                    <tr><td>Akaki Distribution Hub</td><td>Addis / South</td><td>92.0%</td><td><span style="color:var(--green);">Active</span></td></tr>
+                    <tr><td>Regional Sales Branches (10)</td><td>Nationwide</td><td>74.2%</td><td><span style="color:var(--amber);">Expanding</span></td></tr>
+                    <tr><td>Van Sales DSD Pilot</td><td>Regional Corridors</td><td>65.0%</td><td><span style="color:var(--navy);">Scaling Up</span></td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -355,7 +397,6 @@
             btn.classList.add('active');
         }
 
-        // Oil Trend Chart
         new Chart(document.getElementById('oilChart').getContext('2d'), {
             type: 'line',
             data: {
@@ -371,7 +412,6 @@
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } }
         });
 
-        // Strategic Sourcing Base 100 Chart
         new Chart(document.getElementById('sourcingChart').getContext('2d'), {
             type: 'line',
             data: {
@@ -385,7 +425,6 @@
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } }
         });
 
-        // Interactive Simulator with Dynamic Descriptive Output
         function runSimulation() {
             const fxVal = parseInt(document.getElementById('sliderFx').value);
             const freightVal = parseInt(document.getElementById('sliderFreight').value);
@@ -399,14 +438,13 @@
             document.getElementById('simCostImpact').innerText = (costImpact >= 0 ? '+' : '') + costImpact + '%';
             document.getElementById('simMarginImpact').innerText = marginImpact + '%';
 
-            // Generate descriptive narrative based on user slider adjustments
-            let narrative = "<strong>🤖 AI Descriptive Narrative:</strong> ";
+            let narrative = "<strong>🤖 General Manager's AI Briefing:</strong> ";
             if (fxVal > 5 || freightVal > 30) {
-                narrative += `High stress parameters detected (+${fxVal}% FX shift, +${freightVal}% freight). Raw material import overhead will escalate significantly by +${costImpact}%. **Action Recommended:** Coordinate with procurement to leverage localized substitution channels or advance forward contracts before further margin erosion occurs.`;
+                narrative += `High stress detected (+${fxVal}% FX shift, +${freightVal}% freight). Input overhead will rise by +${costImpact}%. **Recommendation:** Advance chemical import forward contracts immediately to protect profit margins.`;
             } else if (fxVal < 0) {
-                narrative += `Favorable currency adjustment (${fxVal}%). Import financing costs are cushioned, mitigating upstream supply pressures on manufacturing lines.`;
+                narrative += `Favorable currency adjustment (${fxVal}%). Import financing costs are well-cushioned against supply chain pressures.`;
             } else {
-                narrative += `Stable parameters detected (+${fxVal}% FX, +${freightVal}% freight). Cost variances (+${costImpact}%) remain within acceptable quarterly variance limits.`;
+                narrative += `Stable parameters (+${fxVal}% FX, +${freightVal}% freight). Cost variances (+${costImpact}%) remain within acceptable quarterly tolerances.`;
             }
             document.getElementById('aiDescriptiveText').innerHTML = narrative;
         }
@@ -418,15 +456,15 @@
             const status = document.getElementById('audioStatusText');
             if (isPlaying) {
                 btn.innerText = "⏸";
-                status.innerText = "Playing 60s Briefing...";
+                status.innerText = "Playing Brief...";
                 setTimeout(() => {
                     isPlaying = false;
                     btn.innerText = "▶";
-                    status.innerText = "Listen 60s Audio Recap";
+                    status.innerText = "60s CEO Recap";
                 }, 5000);
             } else {
                 btn.innerText = "▶";
-                status.innerText = "Listen 60s Audio Recap";
+                status.innerText = "60s CEO Recap";
             }
         }
     </script>
