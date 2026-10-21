@@ -20,7 +20,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background-color: var(--bg); color: var(--text); padding: 24px 36px; }
         
-        /* Header styling */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px; }
         .brand-box { display: flex; align-items: center; gap: 16px; }
         .logo-card {
@@ -55,7 +54,6 @@
         .fx-badge small { display: block; font-size: 9px; text-transform: uppercase; opacity: 0.8; }
         .fx-badge strong { font-size: 16px; font-weight: 800; }
 
-        /* Navigation Tabs */
         .nav-bar {
             background: #fff; padding: 6px; border-radius: 999px; display: inline-flex;
             gap: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); margin-bottom: 20px; flex-wrap: wrap; border: 1px solid var(--border);
@@ -77,7 +75,6 @@
         th { text-align: left; padding: 8px; border-bottom: 2px solid var(--border); color: var(--muted); text-transform: uppercase; font-size: 10px; }
         td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
 
-        /* Simulator Styles */
         .simulator-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
         .slider-group label { display: block; font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
         .slider-group input { width: 100%; accent-color: var(--red); }
@@ -142,7 +139,7 @@
         </div>
     </div>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tabs (5 Tabs) -->
     <div class="nav-bar">
         <button class="tab-btn active" onclick="switchTab('markets', this)">📈 GLOBAL MARKETS</button>
         <button class="tab-btn" onclick="switchTab('sourcing', this)">📊 STRATEGIC SOURCING & SIMULATOR</button>
@@ -191,7 +188,7 @@
         </div>
     </div>
 
-    <!-- TAB 2: STRATEGIC SOURCING & SIMULATOR -->
+    <!-- TAB 2: STRATEGIC SOURCING & SIMULATOR + 1-WEEK COMMODITY TABLE -->
     <div id="tab-sourcing" class="tab-content">
         <div class="grid-2">
             <div class="card">
