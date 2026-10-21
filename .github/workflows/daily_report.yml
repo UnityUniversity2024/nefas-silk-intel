@@ -2,21 +2,23 @@ name: CEO Morning Intelligence Updater
 
 on:
   schedule:
-    # 04:00 UTC = 7:00 AM EAT (Addis Ababa Time)
-    - cron: '0 4 * * *'
+    - cron: '0 4 * * *' # 7:00 AM Addis Ababa Time
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build-and-send:
-    runs-on: ubuntu-24.04 # Pins stable Ubuntu version to avoid Ubuntu 26 migration issues
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '22'
 
       - name: Install Dependencies
         run: npm install nodemailer axios cheerio
