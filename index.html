@@ -13,13 +13,15 @@
             background-color: #f4f7fa;
         }
         .tab-active {
-            background-color: #1a2238 !important;
+            background-color: #0f172a !important; /* Deep navy matching the image */
             color: white !important;
+            border-radius: 9999px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .tab-inactive {
             background-color: transparent;
-            color: #0f172a;
+            color: #001a33 !important; /* Dark navy text for inactive tabs */
+            border-radius: 9999px;
         }
         .tab-inactive:hover {
             background-color: #f1f5f9;
@@ -74,23 +76,23 @@
     </header>
 
     <!-- Navigation Tabs (All 6 Tabs) -->
-    <div class="bg-white rounded-full p-2 flex shadow-sm mb-6 border border-gray-100 overflow-x-auto max-w-full hide-scrollbar gap-2 items-center">
-        <button onclick="switchTab('global')" id="tab-global" class="tab-inactive px-6 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap">
+    <div class="bg-white rounded-full p-1.5 flex shadow-sm mb-6 overflow-x-auto max-w-full hide-scrollbar gap-1 items-center border border-gray-100">
+        <button onclick="switchTab('global')" id="tab-global" class="tab-inactive px-5 py-2.5 text-xs md:text-[13px] font-extrabold tracking-wide flex items-center gap-2 transition-all whitespace-nowrap">
             📈 GLOBAL MARKETS
         </button>
-        <button onclick="switchTab('sourcing')" id="tab-sourcing" class="tab-inactive px-6 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap">
+        <button onclick="switchTab('sourcing')" id="tab-sourcing" class="tab-inactive px-5 py-2.5 text-xs md:text-[13px] font-extrabold tracking-wide flex items-center gap-2 transition-all whitespace-nowrap">
             📊 STRATEGIC SOURCING
         </button>
-        <button onclick="switchTab('exports')" id="tab-exports" class="tab-active px-6 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap">
+        <button onclick="switchTab('exports')" id="tab-exports" class="tab-active px-5 py-2.5 text-xs md:text-[13px] font-extrabold tracking-wide flex items-center gap-2 transition-all whitespace-nowrap">
             ☕ ET ECX & EXPORTS
         </button>
-        <button onclick="switchTab('macro')" id="tab-macro" class="tab-inactive px-6 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap">
+        <button onclick="switchTab('macro')" id="tab-macro" class="tab-inactive px-5 py-2.5 text-xs md:text-[13px] font-extrabold tracking-wide flex items-center gap-2 transition-all whitespace-nowrap">
             🌍 GLOBAL MACRO & LOGISTICS
         </button>
-        <button onclick="switchTab('forex')" id="tab-forex" class="tab-inactive px-6 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap">
+        <button onclick="switchTab('forex')" id="tab-forex" class="tab-inactive px-5 py-2.5 text-xs md:text-[13px] font-extrabold tracking-wide flex items-center gap-2 transition-all whitespace-nowrap">
             💱 FX & TREASURY
         </button>
-        <button onclick="switchTab('executive')" id="tab-executive" class="tab-inactive px-6 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap">
+        <button onclick="switchTab('executive')" id="tab-executive" class="tab-inactive px-5 py-2.5 text-xs md:text-[13px] font-extrabold tracking-wide flex items-center gap-2 transition-all whitespace-nowrap">
             💼 C-SUITE DECISIONS
         </button>
     </div>
@@ -544,28 +546,27 @@
             { name: 'Local Unwashed Wollega LUWL', grade: 'Grade 5', type: 'unwashed', warehouse: 'Gimbi', price: '8,578.03 Birr', change: '+1.13%', volume: '600' }
         ];
 
-        const tbody = document.getElementById('ecx-table-body');
-        if (tbody) {
-            ecxData.forEach(row => {
-                const isNegative = row.change.startsWith('-');
-                const changeClass = isNegative ? 'text-red-500' : 'text-emerald-500';
-                
-                tbody.innerHTML += `
-                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                        <td class="py-3 px-4 font-bold text-gray-900 whitespace-nowrap">${row.name}</td>
-                        <td class="py-3 px-4 text-gray-600">${row.grade}</td>
-                        <td class="py-3 px-4 text-gray-600">${row.type}</td>
-                        <td class="py-3 px-4 text-gray-600">${row.warehouse}</td>
-                        <td class="py-3 px-4 font-bold">${row.price}</td>
-                        <td class="py-3 px-4 font-bold ${changeClass}">${row.change}</td>
-                        <td class="py-3 px-4 text-right text-gray-600">${row.volume}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        // Initialize Chart.js
         document.addEventListener('DOMContentLoaded', function() {
+            const tbody = document.getElementById('ecx-table-body');
+            if (tbody) {
+                ecxData.forEach(row => {
+                    const isNegative = row.change.startsWith('-');
+                    const changeClass = isNegative ? 'text-red-500' : 'text-emerald-500';
+                    
+                    tbody.innerHTML += `
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-3 px-4 font-bold text-gray-900 whitespace-nowrap">${row.name}</td>
+                            <td class="py-3 px-4 text-gray-600">${row.grade}</td>
+                            <td class="py-3 px-4 text-gray-600">${row.type}</td>
+                            <td class="py-3 px-4 text-gray-600">${row.warehouse}</td>
+                            <td class="py-3 px-4 font-bold">${row.price}</td>
+                            <td class="py-3 px-4 font-bold ${changeClass}">${row.change}</td>
+                            <td class="py-3 px-4 text-right text-gray-600">${row.volume}</td>
+                        </tr>
+                    `;
+                });
+            }
+
             const canvas = document.getElementById('commoditiesChart');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -652,7 +653,7 @@
                 });
             }
             
-            // Set initial state (Exports tab is active by default to match screenshots)
+            // Set initial state (Exports tab is active by default)
             switchTab('exports');
         });
     </script>
